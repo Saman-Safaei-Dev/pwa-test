@@ -7,7 +7,7 @@ const withSerwist = withSerwistInit({
 });
 
 const nextConfig: NextConfig = withSerwist({
-  /* config options here */
+  output: "standalone",
 });
 
 export default nextConfig;

@@ -4,7 +4,11 @@
 
 - Node v20
 
----
+### Required Environment Variables
+
+- NEXT_PUBLIC_API_URL
+
+### Instructions
 
 First, install dependencies:
 
@@ -14,10 +18,6 @@ $ npm install
 $ yarn install
 # or
 $ pnpm install
-```
-
-```
-
 ```
 
 Second, run the development server:
@@ -52,10 +52,5 @@ $ docker run --env-file .env -p 3000:3000 nextjs-app:latest
 
 ```
 NEXT_PUBLIC_API_URL=https://68c9962fceef5a150f6569ec.mockapi.io/api
-```
-```
-```
-```
-```
 ```
 ```
