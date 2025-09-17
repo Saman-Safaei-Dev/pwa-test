@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ReactAriaProvider from "@/components/providers/react-aria-provider";
 
 export const metadata: Metadata = {
   title: "PWA Messenger",
@@ -15,7 +16,9 @@ function RootLayout(props: Props) {
 
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <ReactAriaProvider>{children}</ReactAriaProvider>
+      </body>
     </html>
   );
 }
