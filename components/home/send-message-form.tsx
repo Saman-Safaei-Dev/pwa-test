@@ -1,6 +1,12 @@
+"use client";
+
 import { Button, Input, Label, TextField } from "@/components/client";
+import useNetworkStatus from "@/hooks/use-network-status";
 
 function SendMessageForm() {
+  const [status, loaded] = useNetworkStatus();
+  const textColor = status === "Online" ? "text-green-600" : "text-red-600";
+
   return (
     <form className="flex flex-col items-center w-2xs max-w-full mx-auto gap-3 mb-8">
       <TextField className="w-full">
@@ -11,7 +17,9 @@ function SendMessageForm() {
       <div className="flex justify-between w-full items-start">
         <p>
           <span className="text-gray-400">Status:</span>{" "}
-          <span className="text-green-600 font-bold">Online</span>
+          <span className={`${textColor} font-bold`}>
+            {loaded ? status : "..."}
+          </span>
         </p>
 
         <Button className="bg-blue-500 text-white px-5 py-2 rounded-lg">

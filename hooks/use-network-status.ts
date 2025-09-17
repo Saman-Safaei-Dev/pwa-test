@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 type Status = "Online" | "Offline";
 
@@ -7,7 +7,13 @@ type Status = "Online" | "Offline";
  * @returns Status of the user's network, `Online` or `Offline`
  */
 function useNetworkStatus() {
+  const [loaded, setLoaded] = useState(false);
   const [status, setStatus] = useState<Status>("Offline");
+
+  useLayoutEffect(() => {
+    setStatus(navigator.onLine ? "Online" : "Offline");
+    setLoaded(true);
+  }, []);
 
   useEffect(() => {
     const onlineHandler = () => setStatus("Online");
@@ -22,7 +28,7 @@ function useNetworkStatus() {
     };
   }, []);
 
-  return status;
+  return [status, loaded] as const;
 }
 
 export default useNetworkStatus;
