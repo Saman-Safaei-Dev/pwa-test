@@ -64,4 +64,3 @@ $ docker run --env-file .env -p 3000:3000 nextjs-app:latest
 ```
 NEXT_PUBLIC_API_URL=https://68c9962fceef5a150f6569ec.mockapi.io/api
 ```
-```
