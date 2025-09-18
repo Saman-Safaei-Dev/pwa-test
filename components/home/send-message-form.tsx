@@ -10,6 +10,7 @@ import {
 import useMessageMutation from "@/hooks/home/use-message-mutation";
 import useNetworkStatus from "@/hooks/use-network-status";
 import { useState } from "react";
+import InstallBtn from "./install-btn";
 
 type Props = {
   addToQueue: (message: string) => void;
@@ -59,22 +60,24 @@ function SendMessageForm(props: Props) {
         <FieldError className="text-red-600 text-sm">{error}</FieldError>
       </TextField>
 
-      <div className="flex justify-between w-full items-start">
-        <p>
-          <span className="text-gray-400">Status:</span>{" "}
-          <span className={`${textColor} font-bold`}>
-            {loaded ? status : "..."}
-          </span>
-        </p>
+      <div className="flex w-full items-start">
+        <InstallBtn />
 
         <Button
           type="submit"
           isDisabled={isPending}
-          className="bg-blue-500 text-white px-4 py-1 rounded-lg disabled:bg-gray-600 cursor-pointer pressed:bg-blue-600"
+          className="block bg-blue-500 text-white px-4 py-1 rounded-lg disabled:bg-gray-600 cursor-pointer pressed:bg-blue-600"
         >
           Send
         </Button>
       </div>
+
+      <p className="self-start text-sm">
+        <span className="text-gray-400">Status:</span>{" "}
+        <span className={`${textColor} font-bold`}>
+          {loaded ? status : "..."}
+        </span>
+      </p>
     </form>
   );
 }

@@ -48,7 +48,7 @@ function MessagesList() {
         <ul className="flex flex-col items-stretch gap-2">
           {messages.toReversed().map((message) => (
             <li
-              key={message.id}
+              key={message.id + message.content}
               className="bg-blue-100 rounded-xl px-3 py-2 rounded-bl-none"
             >
               {message.content}
