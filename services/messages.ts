@@ -7,7 +7,7 @@ export enum MessagesKeys {
 // Get Messages ---------------------------------------------------------------
 
 export type MessagesResponse = {
-  id: number;
+  id: string;
   content: string;
 }[];
 
@@ -17,7 +17,7 @@ export const getMessagesQuery = () =>
 // Create Message -------------------------------------------------------------
 
 export type CreateMessageResponse = {
-  id: number;
+  id: string;
   content: string;
 };
 

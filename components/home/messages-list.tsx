@@ -1,8 +1,8 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
 import useNetworkStatus from "@/hooks/use-network-status";
 import { getMessagesQuery, MessagesKeys } from "@/services/messages";
-import { useQuery } from "@tanstack/react-query";
 
 function MessagesList() {
   const [status, loaded] = useNetworkStatus();
@@ -10,6 +10,7 @@ function MessagesList() {
   const {
     isError,
     isLoading,
+    isSuccess,
     data: messages,
   } = useQuery({
     queryKey: [MessagesKeys.MESSAGES],
@@ -18,33 +19,38 @@ function MessagesList() {
 
   return (
     <section className="w-2xs max-w-full mx-auto">
-      <h2 className="mb-4 text-gray-500">Messages:</h2>
+      {isSuccess && messages.length > 0 && (
+        <h3 className="mb-4 text-gray-500">Messages:</h3>
+      )}
 
-      <ul className="flex flex-col items-stretch gap-2">
-        {isLoading && (
-          <li className="text-center text-gray-500">Items are loading...</li>
+      <div className="mb-2">
+        {isLoading && loaded && status === "Online" && (
+          <p className="text-center text-gray-500">Items are loading...</p>
         )}
 
         {loaded && status === "Offline" && (
-          <li className="text-center text-blue-600">
+          <p className="text-center text-blue-600">
             Messages are loaded as soon as the user comes online.
-          </li>
+          </p>
         )}
 
         {isError && loaded && status === "Online" && (
-          <li className="text-center text-red-600">Failed to load items.</li>
+          <p className="text-center text-red-600">Failed to load items.</p>
         )}
+      </div>
 
-        {messages?.toReversed().map((message) => (
-          <li
-            key={message.id}
-            className="bg-blue-100 rounded-xl px-3 py-2 rounded-bl-none flex items-start gap-2"
-          >
-            <span>{"-"}</span>
-            <p>{message.content}</p>
-          </li>
-        ))}
-      </ul>
+      {isSuccess && messages.length > 0 && (
+        <ul className="flex flex-col items-stretch gap-2">
+          {messages.toReversed().map((message) => (
+            <li
+              key={message.id}
+              className="bg-blue-100 rounded-xl px-3 py-2 rounded-bl-none"
+            >
+              {message.content}
+            </li>
+          ))}
+        </ul>
+      )}
     </section>
   );
 }

@@ -8,7 +8,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 function useMessageMutation() {
   const queryClient = useQueryClient();
 
-  const { mutate, isPending } = useMutation({
+  const { mutate, mutateAsync, isPending } = useMutation({
     mutationFn: createMessageMutation,
     onSuccess: async (res) => {
       await queryClient.cancelQueries({ queryKey: [MessagesKeys.MESSAGES] });
@@ -22,7 +22,7 @@ function useMessageMutation() {
     },
   });
 
-  return { mutate, isPending };
+  return { mutate, mutateAsync, isPending };
 }
 
 export default useMessageMutation;
