@@ -5,7 +5,6 @@ import MessagesList from "@/components/home/messages-list";
 import SendMessageForm from "@/components/home/send-message-form";
 import useOfflineMessage from "@/hooks/home/use-offline-message";
 import OfflineMessages from "./offline-messages";
-import InstallBtn from "./install-btn";
 
 function HomeContent() {
   const { mutateAsync } = useMessageMutation();
