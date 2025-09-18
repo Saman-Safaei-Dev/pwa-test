@@ -12,8 +12,8 @@ function MessagesList() {
     isLoading,
     data: messages,
   } = useQuery({
-    queryFn: getMessagesQuery,
     queryKey: [MessagesKeys.MESSAGES],
+    queryFn: () => getMessagesQuery().then((res) => res.data),
   });
 
   return (
@@ -25,7 +25,17 @@ function MessagesList() {
           <li className="text-center text-gray-500">Items are loading...</li>
         )}
 
-        {messages?.data.map((message) => (
+        {loaded && status === "Offline" && (
+          <li className="text-center text-blue-600">
+            Messages are loaded as soon as the user comes online.
+          </li>
+        )}
+
+        {isError && loaded && status === "Online" && (
+          <li className="text-center text-red-600">Failed to load items.</li>
+        )}
+
+        {messages?.toReversed().map((message) => (
           <li
             key={message.id}
             className="bg-blue-100 rounded-xl px-3 py-2 rounded-bl-none flex items-start gap-2"
@@ -34,16 +44,6 @@ function MessagesList() {
             <p>{message.content}</p>
           </li>
         ))}
-
-        {isError && loaded && status === "Online" && (
-          <li className="text-center text-red-600">Failed to load items.</li>
-        )}
-
-        {loaded && status === "Offline" && (
-          <li className="text-center text-blue-600">
-            Messages are loaded as soon as the user comes online.
-          </li>
-        )}
       </ul>
     </section>
   );

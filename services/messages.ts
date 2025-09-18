@@ -4,10 +4,22 @@ export enum MessagesKeys {
   MESSAGES = "MESSAGES",
 }
 
-type MessagesResponse = {
+// Get Messages ---------------------------------------------------------------
+
+export type MessagesResponse = {
   id: number;
   content: string;
 }[];
 
 export const getMessagesQuery = () =>
   axiosInstance.get<MessagesResponse>("/messages");
+
+// Create Message -------------------------------------------------------------
+
+export type CreateMessageResponse = {
+  id: number;
+  content: string;
+};
+
+export const createMessageMutation = (message: string) =>
+  axiosInstance.post<CreateMessageResponse>("/messages", { content: message });
