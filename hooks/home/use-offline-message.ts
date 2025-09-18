@@ -5,24 +5,19 @@ function useOfflineMessage(onOnlineSubmit: (msg: string) => Promise<void>) {
 
   const handleOnline = useCallback(
     async (items?: string[]) => {
-      if (items && items.length > 0) {
-        for (const item of items) {
-          await onOnlineSubmit(item);
-          setQueue((prev) => prev.slice(1));
-        }
+      if ((items || queue).length === 0) return;
 
-        return;
-      }
-
-      if (queue.length === 0) return;
-
-      for (const item of queue) {
+      for (const item of items || queue) {
         await onOnlineSubmit(item);
         setQueue((prev) => prev.slice(1));
       }
     },
     [queue, onOnlineSubmit],
   );
+
+  const addToQueue = useCallback((message: string) => {
+    setQueue((prev) => [...prev, message]);
+  }, []);
 
   useEffect(() => {
     const savedItemsString = localStorage.getItem("queue");
@@ -36,16 +31,13 @@ function useOfflineMessage(onOnlineSubmit: (msg: string) => Promise<void>) {
       localStorage.removeItem("queue");
     }
 
+    // Reason: Infinite loop happen
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     localStorage.setItem("queue", JSON.stringify(queue));
   }, [queue]);
-
-  const addToQueue = useCallback((message: string) => {
-    setQueue((prev) => [...prev, message]);
-  }, []);
 
   useEffect(() => {
     const handler = () => handleOnline();

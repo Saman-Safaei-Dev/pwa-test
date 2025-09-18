@@ -1,13 +1,10 @@
-import MessagesList from "@/components/home/messages-list";
-import SendMessageForm from "@/components/home/send-message-form";
+import HomeContent from "@/components/home/home-content";
 
 function Home() {
   return (
     <div className="py-10">
       <h1 className="text-center text-lg font-bold mb-8">Messenger</h1>
-
-      <SendMessageForm />
-      <MessagesList />
+      <HomeContent />
     </div>
   );
 }

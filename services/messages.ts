@@ -2,6 +2,7 @@ import axiosInstance from "@/lib/axios";
 
 export enum MessagesKeys {
   MESSAGES = "MESSAGES",
+  CREATE_MESSAGE = "CREATE_MESSAGE",
 }
 
 // Get Messages ---------------------------------------------------------------

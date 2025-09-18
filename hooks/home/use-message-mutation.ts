@@ -10,6 +10,7 @@ function useMessageMutation() {
 
   const { mutate, mutateAsync, isPending } = useMutation({
     mutationFn: createMessageMutation,
+    mutationKey: [MessagesKeys.CREATE_MESSAGE],
     onSuccess: async (res) => {
       await queryClient.cancelQueries({ queryKey: [MessagesKeys.MESSAGES] });
       queryClient.setQueryData<MessagesResponse>(
