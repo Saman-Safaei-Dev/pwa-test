@@ -20,17 +20,28 @@ $ yarn install
 $ pnpm install
 ```
 
-Second, run the development server:
+Second, build the project:
 
 ```bash
-$ npm run dev
+$ npm run build
 # or
-$ yarn dev
+$ yarn build
 # or
-$ pnpm dev
+$ pnpm build
+```
+
+Third, run the project:
+
+```bash
+$ npm start 
+# or
+$ yarn start
+# or
+$ pnpm start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Warning: Caching will not work on the development server.
 
 ## Getting Started with Docker
 
