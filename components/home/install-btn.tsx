@@ -30,7 +30,7 @@ function InstallBtn() {
   return (
     <Button
       onPress={clickListener}
-      className={`${visible ? "block" : "hidden"} bg-green-500 text-white px-4 py-1 rounded-lg cursor-pointer pressed:bg-green-600 self-center ml-auto mr-1`}
+      className={`${visible ? "block" : "hidden"} bg-green-500 text-white px-4 py-1 rounded-lg cursor-pointer pressed:bg-green-600 self-center mr-1`}
     >
       Install
     </Button>

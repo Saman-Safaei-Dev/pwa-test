@@ -60,7 +60,7 @@ function SendMessageForm(props: Props) {
         <FieldError className="text-red-600 text-sm">{error}</FieldError>
       </TextField>
 
-      <div className="flex w-full items-start">
+      <div className="flex w-full items-start justify-end">
         <InstallBtn />
 
         <Button
